@@ -1,0 +1,22 @@
+{
+  "region": "new_york",
+  "ndbc": [
+    "44025",
+    "44065",
+    "44017"
+  ],
+  "coops": [
+    {
+      "id": "8516945",
+      "name": "Kings Point, NY"
+    },
+    {
+      "id": "8518750",
+      "name": "Battery, New York, NY"
+    },
+    {
+      "id": "8519483",
+      "name": "Bergen Point West Reach, NY"
+    }
+  ]
+}
