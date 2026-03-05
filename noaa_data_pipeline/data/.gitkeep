@@ -1,0 +1,4 @@
+# Downloaded data files are stored here and are git-ignored.
+# Directory layout:
+#   data/source=coops/station={id}/product={product}/year={yyyy}/month={mm}.parquet
+#   data/source=ndbc/station={id}/year={yyyy}/data.parquet
