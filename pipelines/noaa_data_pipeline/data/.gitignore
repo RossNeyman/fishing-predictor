@@ -1,6 +1,0 @@
-# Ignore downloaded data files
-*.parquet
-*.csv
-
-# Keep directory stubs
-!.gitkeep
