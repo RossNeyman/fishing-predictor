@@ -15,6 +15,16 @@ DISPLAY_LABELS = {
     "MODE_F": "Mode of fishing",
     "CNTRBTRS": "Number of people fishing with you",
 }
+MODE_F_CHOICES = [
+    ("Pier, dock", 1),
+    ("Jetty, breakwater, breachway", 2),
+    ("Bridge, causeway", 3),
+    ("Other man-made structure", 4),
+    ("Beach or bank", 5),
+    ("Head boat", 6),
+    ("Charter boat", 7),
+    ("Private/rental boat", 8),
+]
 EXCLUDED_FIELDS = {"IMP_REC", "year"}
 FIXED_YEAR = 2024
 UI_FIELDS = [field for field in SCHEMA if field.name not in EXCLUDED_FIELDS]
@@ -24,6 +34,13 @@ AUTO_FIELDS = [field for field in UI_FIELDS if field.name not in USER_INPUT_FIEL
 
 def _component_for_field(field: FieldSpec, interactive: bool = True) -> Component:
     label = DISPLAY_LABELS.get(field.name, field.name)
+    if field.name == "MODE_F":
+        return gr.Dropdown(
+            choices=MODE_F_CHOICES,
+            value=int(field.default),
+            label=label,
+            interactive=interactive,
+        )
     if field.field_type == "bool":
         return gr.Checkbox(label=label, value=bool(field.default), interactive=interactive)
 
@@ -105,7 +122,7 @@ def _predict(is_advanced: bool, auto_state: dict[str, object], *values) -> str:
     label_text = _format_label(label)
     if probability is None or label_text.startswith("Predicted class:"):
         return label_text
-    return f"{label_text} (probability: {probability:.3f})"
+    return f"{label_text} (confidence: {probability:.3f})"
 
 
 def _auto_fill(is_advanced: bool, auto_state: dict[str, object], *values):
